@@ -5,7 +5,7 @@ import cors from "cors";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import cookieParser from "cookie-parser";
 
-import helmet from "helmet"
+import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 
 import productsRoute from "./routes/productRoute.js";
@@ -31,8 +31,8 @@ const connectDb = async () => {
 connectDb();
 
 app.use(express.json());
-app.use(helmet())
-app.use(ExpressMongoSanitize())
+app.use(helmet());
+app.use(ExpressMongoSanitize());
 app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
