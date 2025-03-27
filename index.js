@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import cookieParser from "cookie-parser";
+import { v2 as cloudinary } from "cloudinary";
 
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
@@ -16,6 +17,14 @@ const app = express();
 dotenv.config();
 
 const port = parseInt(process.env.PORT, 10) || 5000;
+
+ // Configuration
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+    
 
 //connect to database
 const connectDb = async () => {
