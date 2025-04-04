@@ -18,13 +18,12 @@ dotenv.config();
 
 const port = parseInt(process.env.PORT, 10) || 5000;
 
- // Configuration
-    cloudinary.config({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
-    });
-    
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 //connect to database
 const connectDb = async () => {
@@ -42,7 +41,12 @@ connectDb();
 app.use(express.json());
 app.use(helmet());
 app.use(ExpressMongoSanitize());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Terima request dari mana saja (tidak direkomendasikan untuk production!)
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
