@@ -41,12 +41,7 @@ connectDb();
 app.use(express.json());
 app.use(helmet());
 app.use(ExpressMongoSanitize());
-app.use(
-  cors({
-    origin: "*", // Terima request dari mana saja (tidak direkomendasikan untuk production!)
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
